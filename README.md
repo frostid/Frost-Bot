@@ -9,7 +9,7 @@ Originally a Saitama fork, Levi evolved further and was built to be more robust.
 
 Can be found on telegram as [Levi](https://t.me/lipaiRobot).
 
-The Support group can be reached out to at [Frost Support](https://t.me/animegrupindo), where you can ask for help about [Levi](https://t.me/lipaiRobot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
+The Support group can be reached out to at [Levi Support](https://t.me/animegrupindo), where you can ask for help about [Levi](https://t.me/lipaiRobot), discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
 
 News channel as at [One Punch Updates](https://t.me/OnePunchUpdates) 
 
