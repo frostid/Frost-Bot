@@ -57,7 +57,7 @@ I am a modular group management bot.
 You can find my list of available commands with 👉 /help.
 
 ===================
-My owner [Frost](t.me/frost_id)
+My owner [🔥ŇΔΜ€Ł€ŞŞ🔥](https://t.me/Nameless_hacker_is_back)
 """
 
 HELP_STRINGS = """
@@ -80,7 +80,7 @@ And the following:
     dispatcher.bot.first_name, ""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
-ASTRAKOBOT_IMG = "https://telegra.ph/file/9dc9f28fc115805f6ca73.jpg"
+ASTRAKOBOT_IMG = "https://telegra.ph/file/6f0998caabc9ebbea708b.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Frost Bot is hosted on its own server and doesn't require any donations as of now but \
@@ -203,7 +203,7 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="✅ Add Frost to your group",
+                            text="✅ Add Agni to your group",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
