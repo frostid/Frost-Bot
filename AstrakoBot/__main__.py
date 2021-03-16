@@ -222,27 +222,34 @@ def start(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[
-                        InlineKeyboardButton(
-                            text="✅ Add Deagle Bot to your group",
-                            url="t.me/{}?startgroup=true".format(
-                                context.bot.username))
-                    ],
-                     [
-                         InlineKeyboardButton(
-                             text="Deagle Group",
-                             url=f"https://t.me/deaglekernel"),
-                     ],
-                     [
-                         InlineKeyboardButton(
-                             text="Updates Channel",
-                             url="https://t.me/deaglechannel")
-                     ],
-                     [
-                         InlineKeyboardButton(
-                             text="Source kernel",
-                             url="https://github.com/DDEAGLE1/kernel-sdm660")
-                     ]]))
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="✅ Add Deagle Bot to your group",
+                                url="t.me/{}?startgroup=true".format(
+                                    context.bot.username
+                                ),
+                            )
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Deagle Group", url=f"https://t.me/deaglekernel"
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Updates Channel", url="https://t.me/deaglechannel"
+                            )
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Source kernel",
+                                url="https://github.com/DDEAGLE1/kernel-sdm660",
+                            )
+                        ],
+                    ]
+                ),
+            )
     else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
