@@ -11,21 +11,25 @@ def covid(update: Update, context: CallbackContext):
     message = update.effective_message
     country = message.text[len("/covid ") :]
     covid = Covid()
-    country_data = covid.get_status_by_country_name(country)
-    if country_data:
-        info = f"*Corona Virus Info*\n\n"
-        info += f"• Country: `{country}`\n"
-        info += f"• Confirmed: `{country_data['confirmed']}`\n"
-        info += f"• Active: `{country_data['active']}`\n"
-        info += f"• Deaths: `{country_data['deaths']}`\n"
-        info += f"• Recovered: `{country_data['recovered']}`\n"
-        info += (
-            "Last update: "
-            f"`{datetime.utcfromtimestamp(country_data['last_update'] // 1000).strftime('%Y-%m-%d %H:%M:%S')}`\n"
-        )
-        info += f"__Data provided by__ [Johns Hopkins University](https://j.mp/2xf6oxF)"
+    if country:
+        country_data = covid.get_status_by_country_name(country)
+        if country_data:
+            info = f"*Corona Virus Info*\n\n"
+            info += f"• Country: `{country}`\n"
+            info += f"• Confirmed: `{country_data['confirmed']}`\n"
+            info += f"• Active: `{country_data['active']}`\n"
+            info += f"• Deaths: `{country_data['deaths']}`\n"
+            info += f"• Recovered: `{country_data['recovered']}`\n"
+            info += (
+                "Last update: "
+                f"`{datetime.utcfromtimestamp(country_data['last_update'] // 1000).strftime('%Y-%m-%d %H:%M:%S')}`\n"
+            )
+            info += f"__Data provided by__ [Johns Hopkins University](https://j.mp/2xf6oxF)"
+        else:
+            info = "No information yet about this country!"
     else:
-        info = f"No information yet about this country!"
+        info = "Please specify a country"
+
 
     bot.send_message(
         chat_id=update.effective_chat.id,
