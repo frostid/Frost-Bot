@@ -51,7 +51,6 @@ def check_user_id(user_id: int, context: CallbackContext) -> Optional[str]:
 ### Deep link example ends
 
 
-@run_async
 @dev_plus
 @gloggable
 def addsudo(update: Update, context: CallbackContext) -> str:
@@ -70,6 +69,10 @@ def addsudo(update: Update, context: CallbackContext) -> str:
 
     with open(ELEVATED_USERS_FILE, "r") as infile:
         data = json.load(infile)
+
+    if user_id in DEV_USERS:
+        message.reply_text("Huh? he is more than sudo!")
+        return ""
 
     if user_id in DRAGONS:
         message.reply_text("This user is already sudo")
@@ -107,7 +110,6 @@ def addsudo(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @sudo_plus
 @gloggable
 def addsupport(
@@ -166,7 +168,6 @@ def addsupport(
     return log_message
 
 
-@run_async
 @sudo_plus
 @gloggable
 def addwhitelist(update: Update, context: CallbackContext) -> str:
@@ -222,7 +223,6 @@ def addwhitelist(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @dev_plus
 @gloggable
 def removesudo(update: Update, context: CallbackContext) -> str:
@@ -240,6 +240,10 @@ def removesudo(update: Update, context: CallbackContext) -> str:
 
     with open(ELEVATED_USERS_FILE, "r") as infile:
         data = json.load(infile)
+
+    if user_id in DEV_USERS:
+        message.reply_text("Huh? he is more than sudo!")
+        return ""
 
     if user_id in DRAGONS:
         message.reply_text("Demoted to normal user")
@@ -265,7 +269,6 @@ def removesudo(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @sudo_plus
 @gloggable
 def removesupport(update: Update, context: CallbackContext) -> str:
@@ -308,7 +311,6 @@ def removesupport(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @sudo_plus
 @gloggable
 def removewhitelist(update: Update, context: CallbackContext) -> str:
@@ -350,7 +352,6 @@ def removewhitelist(update: Update, context: CallbackContext) -> str:
         return ""
 
 
-@run_async
 @whitelist_plus
 def whitelistlist(update: Update, context: CallbackContext):
     reply = "<b>Whitelist users:</b>\n"
@@ -366,7 +367,6 @@ def whitelistlist(update: Update, context: CallbackContext):
     m.edit_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def supportlist(update: Update, context: CallbackContext):
     bot = context.bot
@@ -381,7 +381,6 @@ def supportlist(update: Update, context: CallbackContext):
     m.edit_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def sudolist(update: Update, context: CallbackContext):
     bot = context.bot
@@ -400,7 +399,6 @@ def sudolist(update: Update, context: CallbackContext):
     m.edit_text(reply, parse_mode=ParseMode.HTML)
 
 
-@run_async
 @whitelist_plus
 def devlist(update: Update, context: CallbackContext):
     bot = context.bot
@@ -497,17 +495,17 @@ Group admins/group owners do not need these commands.
 Visit @{SUPPORT_CHAT} for more information.
 """
 
-SUDO_HANDLER = CommandHandler(("addsudo"), addsudo)
-SUPPORT_HANDLER = CommandHandler(("addsupport"), addsupport)
-WHITELIST_HANDLER = CommandHandler(("addwhitelist"), addwhitelist)
-UNSUDO_HANDLER = CommandHandler(("removesudo"), removesudo)
-UNSUPPORT_HANDLER = CommandHandler(("removesupport"), removesupport)
-UNWHITELIST_HANDLER = CommandHandler(("removewhitelist"), removewhitelist)
+SUDO_HANDLER = CommandHandler(("addsudo"), addsudo, run_async=True)
+SUPPORT_HANDLER = CommandHandler(("addsupport"), addsupport, run_async=True)
+WHITELIST_HANDLER = CommandHandler(("addwhitelist"), addwhitelist, run_async=True)
+UNSUDO_HANDLER = CommandHandler(("removesudo"), removesudo, run_async=True)
+UNSUPPORT_HANDLER = CommandHandler(("removesupport"), removesupport, run_async=True)
+UNWHITELIST_HANDLER = CommandHandler(("removewhitelist"), removewhitelist, run_async=True)
 
-WHITELISTLIST_HANDLER = CommandHandler(("whitelistlist"), whitelistlist)
-SUPPORTLIST_HANDLER = CommandHandler(("supportlist"), supportlist)
-SUDOLIST_HANDLER = CommandHandler(("sudolist"), sudolist)
-DEVLIST_HANDLER = CommandHandler(("devlist"), devlist)
+WHITELISTLIST_HANDLER = CommandHandler(("whitelistlist"), whitelistlist, run_async=True)
+SUPPORTLIST_HANDLER = CommandHandler(("supportlist"), supportlist, run_async=True)
+SUDOLIST_HANDLER = CommandHandler(("sudolist"), sudolist, run_async=True)
+DEVLIST_HANDLER = CommandHandler(("devlist"), devlist, run_async=True)
 
 dispatcher.add_handler(SUDO_HANDLER)
 dispatcher.add_handler(SUPPORT_HANDLER)
