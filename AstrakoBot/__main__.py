@@ -217,27 +217,35 @@ def start(update: Update, context: CallbackContext):
                 ),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    [[
-                        InlineKeyboardButton(
-                            text="✅ Add Frost to your group",
-                            url="t.me/{}?startgroup=true".format(
-                                context.bot.username))
-                    ],
-                     [
-                         InlineKeyboardButton(
-                             text="Support Group",
-                             url=f"https://t.me/FrostSupport"),
-                     ],
-                     [
-                         InlineKeyboardButton(
-                             text="Getting started guide",
-                             url="https://t.me/OnePunchUpdates/29")
-                     ],
-                     [
-                         InlineKeyboardButton(
-                             text="Source code",
-                             url="https://github.com/frostid/FrostRobot")
-                     ]]))
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="✅ Add Frost to your group",
+                                url="t.me/{}?startgroup=true".format(
+                                    context.bot.username
+                                ),
+                            )
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Support Group", url=f"https://t.me/FrostSupport"
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Getting started guide",
+                                url="https://t.me/OnePunchUpdates/29",
+                            )
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Source code",
+                                url="https://github.com/frostid/FrostRobot",
+                            )
+                        ],
+                    ]
+                ),
+            )
     else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
@@ -613,10 +621,14 @@ def main():
     start_handler = CommandHandler("start", start, run_async=True)
 
     help_handler = CommandHandler("help", get_help, run_async=True)
-    help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*", run_async=True)
+    help_callback_handler = CallbackQueryHandler(
+        help_button, pattern=r"help_.*", run_async=True
+    )
 
     settings_handler = CommandHandler("settings", get_settings, run_async=True)
-    settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", run_async=True)
+    settings_callback_handler = CallbackQueryHandler(
+        settings_button, pattern=r"stngs_", run_async=True
+    )
 
     donate_handler = CommandHandler("donate", donate, run_async=True)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)

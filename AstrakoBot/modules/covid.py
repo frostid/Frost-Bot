@@ -24,12 +24,13 @@ def covid(update: Update, context: CallbackContext):
                 "Last update: "
                 f"`{datetime.utcfromtimestamp(country_data['last_update'] // 1000).strftime('%Y-%m-%d %H:%M:%S')}`\n"
             )
-            info += f"__Data provided by__ [Johns Hopkins University](https://j.mp/2xf6oxF)"
+            info += (
+                f"__Data provided by__ [Johns Hopkins University](https://j.mp/2xf6oxF)"
+            )
         else:
             info = "No information yet about this country!"
     else:
         info = "Please specify a country"
-
 
     bot.send_message(
         chat_id=update.effective_chat.id,

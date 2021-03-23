@@ -130,17 +130,17 @@ def weather(update: Update, context: CallbackContext):
             info += f"• **Wind:** `{kmph[0]} km/h`\n"
             info += f"• **Sunrise**: `{sun(sunrise)}`\n"
             info += f"• **Sunset**: `{sun(sunset)}`"
-        
+
     else:
-        info =  "Please specify a city or country"
-            
-            
+        info = "Please specify a city or country"
+
     bot.send_message(
         chat_id=update.effective_chat.id,
         text=info,
         parse_mode=ParseMode.MARKDOWN,
         disable_web_page_preview=True,
     )
+
 
 WEATHER_HANDLER = CommandHandler(["weather"], weather, run_async=True)
 dispatcher.add_handler(WEATHER_HANDLER)

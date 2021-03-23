@@ -37,8 +37,7 @@ def afk(update: Update, context: CallbackContext):
     sql.set_afk(update.effective_user.id, reason)
     fname = update.effective_user.first_name
     try:
-        update.effective_message.reply_text("{} is now AFK!{}".format(
-            fname, notice))
+        update.effective_message.reply_text("{} is now AFK!{}".format(fname, notice))
     except BadRequest:
         pass
 
@@ -57,9 +56,13 @@ def no_longer_afk(update: Update, context: CallbackContext):
         firstname = update.effective_user.first_name
         try:
             options = [
-                '{} is here!', '{} is back!', '{} is now in the chat!',
-                '{} is awake!', '{} is back online!', '{} is finally here!',
-                'Welcome back! {}'
+                "{} is here!",
+                "{} is back!",
+                "{} is now in the chat!",
+                "{} is awake!",
+                "{} is back online!",
+                "{} is finally here!",
+                "Welcome back! {}",
             ]
             chosen_option = random.choice(options)
             update.effective_message.reply_text(chosen_option.format(firstname))
@@ -130,7 +133,8 @@ def check_afk(update: Update, context: CallbackContext, user_id, fst_name, userc
             if int(userc_id) == int(user_id):
                 return
             res = "{} is AFK.\nReason: <code>{}</code>".format(
-                html.escape(fst_name), html.escape(user.reason))
+                html.escape(fst_name), html.escape(user.reason)
+            )
             update.effective_message.reply_text(res, parse_mode="html")
 
 
@@ -144,8 +148,12 @@ AFK_HANDLER = DisableAbleCommandHandler("afk", afk, run_async=True)
 AFK_REGEX_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"^(?i)brb(.*)$"), afk, friendly="afk"
 )
-NO_AFK_HANDLER = MessageHandler(Filters.all & Filters.chat_type.groups, no_longer_afk, run_async=True)
-AFK_REPLY_HANDLER = MessageHandler(Filters.all & Filters.chat_type.groups, reply_afk, run_async=True)
+NO_AFK_HANDLER = MessageHandler(
+    Filters.all & Filters.chat_type.groups, no_longer_afk, run_async=True
+)
+AFK_REPLY_HANDLER = MessageHandler(
+    Filters.all & Filters.chat_type.groups, reply_afk, run_async=True
+)
 
 dispatcher.add_handler(AFK_HANDLER, AFK_GROUP)
 dispatcher.add_handler(AFK_REGEX_HANDLER, AFK_GROUP)

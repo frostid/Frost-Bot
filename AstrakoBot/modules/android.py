@@ -44,14 +44,18 @@ def orangefox(update: Update, context: CallbackContext):
     device = message.text[len("/orangefox ") :]
 
     if device:
-        link = get(f"https://api.orangefox.download/v3/releases/?codename={device}&sort=date_desc&limit=1")
+        link = get(
+            f"https://api.orangefox.download/v3/releases/?codename={device}&sort=date_desc&limit=1"
+        )
 
         if link.status_code == 404:
             message = f"OrangeFox currently is not avaliable for {device}"
         else:
             page = loads(link.content)
             file_id = page["data"][0]["_id"]
-            link = get(f"https://api.orangefox.download/v3/devices/get?codename={device}")
+            link = get(
+                f"https://api.orangefox.download/v3/devices/get?codename={device}"
+            )
             page = loads(link.content)
             oem = page["oem_name"]
             model = page["model_name"]
@@ -78,11 +82,10 @@ def orangefox(update: Update, context: CallbackContext):
             message += f"• Date: {date}\n"
             message += f"• File: {dl_file}\n"
             message += f"• MD5: {md5}\n\n"
-            message += f"• <b>Download:</b> {dl_link}\n"        
+            message += f"• <b>Download:</b> {dl_link}\n"
 
     else:
         message = "Please specify a device codename"
-
 
     bot.send_message(
         chat_id=update.effective_chat.id,
@@ -117,7 +120,6 @@ def twrp(update: Update, context: CallbackContext):
             message += f"• <b>Download:</b> {dl_link}\n"
     else:
         message = "Please specify a device codename"
-
 
     bot.send_message(
         chat_id=update.effective_chat.id,
