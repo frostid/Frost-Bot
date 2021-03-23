@@ -10,7 +10,7 @@ DEFAULT_WELCOME = "Hey {first}, how are you?"
 DEFAULT_GOODBYE = "Nice knowing ya!"
 
 DEFAULT_WELCOME_MESSAGES = [
-    "Hey {first}, how are you?",  #Discord welcome messages copied
+    "Hey {first}, how are you?",  # Discord welcome messages copied
 ]
 DEFAULT_GOODBYE_MESSAGES = [
     "{first} has left the chat.",

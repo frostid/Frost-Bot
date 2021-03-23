@@ -31,7 +31,6 @@ from AstrakoBot.modules.helper_funcs.string_handling import extract_time
 from AstrakoBot.modules.log_channel import gloggable, loggable
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -108,7 +107,11 @@ def ban(update: Update, context: CallbackContext) -> str:
         )
         if reason:
             reply += f"\n<code> </code><b>•  Reason:</b> \n{html.escape(reason)}"
-        bot.sendMessage(chat.id, reply, parse_mode=ParseMode.HTML, quote=False)
+        bot.sendMessage(
+            chat.id,
+            reply,
+            parse_mode=ParseMode.HTML,
+        )
         return log
 
     except BadRequest as excp:
@@ -132,7 +135,6 @@ def ban(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -221,7 +223,6 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -259,10 +260,13 @@ def punch(update: Update, context: CallbackContext) -> str:
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
         # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        bot.sendMessage(
-            chat.id,
-            f"Kicked! {mention_html(member.user.id, html.escape(member.user.first_name))}.",
-            parse_mode=ParseMode.HTML)
+        reply = (
+            f"<code>❕</code><b>Kick Event</b>\n"
+            f"<code> </code><b>•  User:</b> {mention_html(member.user.id, html.escape(member.user.first_name))}\n"
+        )
+        if reason:
+            reply += f"<code> </code><b>•  Reason:</b> {html.escape(reason)}"
+        bot.sendMessage(chat.id, reply, parse_mode=ParseMode.HTML)
         log = (
             f"<b>{html.escape(chat.title)}:</b>\n"
             f"#KICKED\n"
@@ -280,7 +284,6 @@ def punch(update: Update, context: CallbackContext) -> str:
     return log_message
 
 
-@run_async
 @bot_admin
 @can_restrict
 def punchme(update: Update, context: CallbackContext):
@@ -296,7 +299,6 @@ def punchme(update: Update, context: CallbackContext):
         update.effective_message.reply_text("Huh? I can't :/")
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -345,7 +347,6 @@ def unban(update: Update, context: CallbackContext) -> str:
     return log
 
 
-@run_async
 @connection_status
 @bot_admin
 @can_restrict
@@ -399,17 +400,17 @@ __help__ = """
  • `/sban <userhandle>`*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
  • `/tban <userhandle> x(m/h/d)`*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
  • `/unban <userhandle>`*:* unbans a user. (via handle, or reply)
- • `/punch <userhandle>`*:* Punches a user out of the group, (via handle, or reply)
+ • `/punch <userhandle> <reason>(optional)`*:* Punches a user out of the group, (via handle, or reply)
  • `/kick <userhandle>`*:* same as punch
 """
 
-BAN_HANDLER = DisableAbleCommandHandler(["ban", "sban"], ban)
-TEMPBAN_HANDLER = DisableAbleCommandHandler(["tban"], temp_ban)
-PUNCH_HANDLER = DisableAbleCommandHandler(["punch", "kick"], punch)
-UNBAN_HANDLER = DisableAbleCommandHandler("unban", unban)
-ROAR_HANDLER = DisableAbleCommandHandler("roar", selfunban)
+BAN_HANDLER = DisableAbleCommandHandler(["ban", "sban"], ban, run_async=True)
+TEMPBAN_HANDLER = DisableAbleCommandHandler(["tban"], temp_ban, run_async=True)
+PUNCH_HANDLER = DisableAbleCommandHandler(["punch", "kick"], punch, run_async=True)
+UNBAN_HANDLER = DisableAbleCommandHandler("unban", unban, run_async=True)
+ROAR_HANDLER = DisableAbleCommandHandler("roar", selfunban, run_async=True)
 PUNCHME_HANDLER = DisableAbleCommandHandler(
-    ["punchme", "kickme"], punchme, filters=Filters.group
+    ["punchme", "kickme"], punchme, filters=Filters.chat_type.groups, run_async=True
 )
 
 dispatcher.add_handler(BAN_HANDLER)
