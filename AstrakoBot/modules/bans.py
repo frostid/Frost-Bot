@@ -262,7 +262,8 @@ def punch(update: Update, context: CallbackContext) -> str:
         bot.sendMessage(
             chat.id,
             f"Kicked! {mention_html(member.user.id, html.escape(member.user.first_name))}.",
-            parse_mode=ParseMode.HTML)
+            parse_mode=ParseMode.HTML,
+        )
         log = (
             f"<b>{html.escape(chat.title)}:</b>\n"
             f"#KICKED\n"
