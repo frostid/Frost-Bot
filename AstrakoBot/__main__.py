@@ -79,7 +79,7 @@ I am a modular group management bot.
 You can find my list of available commands with 👉 /help.
 
 ===================
-My owner [Frost](t.me/frost_id)
+My owner [Ihsan #](t.me/RxyMX)
 """
 
 HELP_STRINGS = """
@@ -103,12 +103,12 @@ And the following:
     "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n",
 )
 
-ASTRAKOBOT_IMG = "https://telegra.ph/file/9dc9f28fc115805f6ca73.jpg"
+ASTRAKOBOT_IMG = "https://telegra.ph/file/b57edf1bae1dd54de089a.jpg"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Frost Bot is hosted on its own server and doesn't require any donations as of now but \
 You can donate to the original writer of the Base code, Paul
-There are two ways of supporting him; [PayPal](paypal.me/PaulSonOfLars), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
+There are two ways of supporting him; [PayPal](paypal.me/Ihsanzcoki), or [Monzo](monzo.me/paulnionvestergaardlarsen)."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -224,14 +224,14 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="✅ Add Frost to your group",
+                            text="✅ Add Levi to your group",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
                              text="Support Group",
-                             url=f"https://t.me/FrostSupport"),
+                             url=f"https://t.me/animegrupindo"),
                      ],
                      [
                          InlineKeyboardButton(
