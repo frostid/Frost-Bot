@@ -73,13 +73,16 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hi *{}*, my name is *{}*! 
-I am a modular group management bot.
-
-You can find my list of available commands with 👉 /help.
-
-===================
-My owner [Frost](t.me/frost_id)
+━━━━━━━━━━━━━━━━━━━━━━━
+Hi *{}*
+My Name is *{}*
+I am an manager group management bot
+with a lot of Special Features.
+You can find the list of available commands
+with klik 👉 /help or button below
+╾─────────────────────╼
+ *Maintained by* [Ihsan•イサン](t.me/RxyMX)
+━━━━━━━━━━━━━━━━━━━━━━━
 """
 
 HELP_STRINGS = """
@@ -103,7 +106,7 @@ And the following:
     "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n",
 )
 
-ASTRAKOBOT_IMG = "https://telegra.ph/file/9dc9f28fc115805f6ca73.jpg"
+ASTRAKOBOT_IMG = "https://telegra.ph/file/0031a7eadab404ec555e4.mp4"
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 Frost Bot is hosted on its own server and doesn't require any donations as of now but \
@@ -224,24 +227,24 @@ def start(update: Update, context: CallbackContext):
                 reply_markup=InlineKeyboardMarkup(
                     [[
                         InlineKeyboardButton(
-                            text="✅ Add Frost to your group",
+                            text=" 🌟 Add Me To Your Group 🌟 ",
                             url="t.me/{}?startgroup=true".format(
                                 context.bot.username))
                     ],
                      [
                          InlineKeyboardButton(
-                             text="Support Group",
-                             url=f"https://t.me/FrostSupport"),
+                             text=" Anime Group Indo ",
+                             url=f"https://t.me/animegrupindo"),
                      ],
                      [
                          InlineKeyboardButton(
-                             text="Getting started guide",
-                             url="https://t.me/OnePunchUpdates/29")
+                             text=" Anime Channel Indo ",
+                             url="https://t.me/animechanelindo")
                      ],
                      [
                          InlineKeyboardButton(
-                             text="Source code",
-                             url="https://github.com/frostid/FrostRobot")
+                             text=" 🚫 GBAN LOGS ",
+                             url="https://t.me/gbanlogs_bot")
                      ]]))
     else:
         update.effective_message.reply_text(
